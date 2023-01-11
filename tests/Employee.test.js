@@ -70,6 +70,7 @@ describe("Employee", () => {
             // have to package it as a callback or else it will immediately throw before even getting tested
             const cb = () => new Employee("", 123, "karl@gmail.com");
             expect(cb).toThrow("Parameter 'name' is either not a string or is undefined.");
+            // Credit the toThrow() function here: https://eloquentcode.com/expect-a-function-to-throw-an-exception-in-jest
         });
         it("should throw if id is not a number or empty", () => {
             const cb = () => new Employee("Karl", [1,'lol',false], "karl@gmail.com");

@@ -1,9 +1,8 @@
 const Employee = require("../lib/Employee");
 
 describe("Employee", () => {
-    // Does it exist as you expect it to?
-    describe("Initialization", () => {
-        it("should return that instanceof Employee exists", () => {
+    describe("Object initialization", () => {
+        it("should return that instanceof Employee is true when a new object is created with the constructor", () => {
             const obj = new Employee("Karl", 123, "karl@gmail.com");
 
             expect(obj instanceof Employee).toEqual(true);
@@ -28,7 +27,6 @@ describe("Employee", () => {
             expect(testId).toEqual(result);
         });
     });
-    // is it working?
     describe("Methods", () => {
         it("should return this.name with getName()", () => {
             const obj = new Employee("Karl", 123, "karl@gmail.com");
@@ -66,13 +64,7 @@ describe("Employee", () => {
             expect(getRole).toEqual(result);
         });
     });
-})
-
-
-
-// does it not work in the ways you want?
-
-// do these units of features work as expected?
+});
 
 // writing about interactions and behaviors; when i write this, i should get this.
 

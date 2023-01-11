@@ -26,6 +26,7 @@ describe("Employee", () => {
 
             expect(testId).toEqual(result);
         });
+
     });
     describe("Methods", () => {
         it("should return this.name with getName()", () => {
@@ -64,6 +65,21 @@ describe("Employee", () => {
             expect(getRole).toEqual(result);
         });
     });
+    describe("Parameter type exception tests", () => {
+        it("should throw if name is not a string or empty", () => {
+            // have to package it as a callback or else it will immediately throw before even getting tested
+            const cb = () => new Employee("", 123, "karl@gmail.com");
+            expect(cb).toThrow("Parameter 'name' is either not a string or is undefined.");
+        });
+        it("should throw if id is not a number or empty", () => {
+            const cb = () => new Employee("Karl", [1,'lol',false], "karl@gmail.com");
+            expect(cb).toThrow("Parameter 'id' either is not a number or is undefined.");
+        });
+        it("should throw if email is not a string or empty", () => {
+            const cb = () => new Employee("Karl", 123, true);
+            expect(cb).toThrow("Parameter 'email' is either not a string or is undefined.");
+        });
+    })
 });
 
 // writing about interactions and behaviors; when i write this, i should get this.

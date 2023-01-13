@@ -13,18 +13,19 @@ const { internQuestions } = require('./lib/questions');
 const teamMembers = [];
 
 function init() {
-    inquirer.prompt(initialPrompt).then((answers) => {
-        if (answers.start === 'Start') {
-            inquirer.prompt(managerQuestions).then((answers) => {
-                // turn answers into manager object
-                teamMembers.push(newManager);
-                addEmployee();
-            })
-        };
-        if (answers.start === 'Close') {
-            return console.log("Closing.")
-        };
-    })
+    inquirer.prompt(managerQuestions)
+    .then((answers) => {
+            // turn answers into manager object
+            const newManager = new team.Manager(
+                answers.managerName,
+                Number(answers.managerID),
+                answers.managerEmail,
+                Number(answers.managerOffice));
+            console.log(newManager);
+            teamMembers.push(newManager);
+        }
+    ).then(() => {addEmployee()});
+    // https://github.com/SBoudrias/Inquirer.js/blob/master/packages/inquirer/examples/nested-call.js
 };
 
 function addEmployee() {
@@ -44,6 +45,12 @@ function addEmployee() {
 function addEngineer() {
     inquirer.prompt(engineerQuestions).then((answers) => {
         // turn answers into engineer object
+        const newEngineer = new team.Engineer(
+            answers.engineerName,
+            Number(answers.engineerID),
+            answers.engineerEmail,
+            answers.engineerGitHub);
+        console.log(newEngineer);
         teamMembers.push(newEngineer);
         addEmployee();
     })
@@ -51,7 +58,11 @@ function addEngineer() {
 
 function addIntern() {
     inquirer.prompt(internQuestions).then((answers) => {
-        // turn answers into intern object
+        const newIntern = new team.Intern(
+            answers.internName,
+            Number(answers.internID),
+            answers.internEmail,
+            answers.internSchool);
         teamMembers.push(newIntern);
         addEmployee();
     })
@@ -60,4 +71,7 @@ function addIntern() {
 function generateTeam() {
     // using the teamMembers object,
     // fill in HTML template
+    console.log(teamMembers);
 }
+
+init();

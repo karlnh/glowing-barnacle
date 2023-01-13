@@ -23,7 +23,23 @@ function init() {
                 answers.managerEmail,
                 Number(answers.managerOffice));
             console.log(newManager);
-            teamMembers.push(newManager);
+            const managerTemplate =
+            `
+<card class="card" id="manager-name">
+    <div>
+        <div>
+            <h3>${newManager.name}</h3>
+            <h4>${newManager.getRole()}</h4>
+        </div>
+        <ul>
+            <li>${newManager.id}</li>
+            <li>${newManager.email}</li>
+            <li>${newManager.officeNumber}</li>
+        </ul>
+    </div>
+</card>
+            `
+            teamMembers.push(managerTemplate);
         }
     ).then(() => {addEmployee()});
     // https://github.com/SBoudrias/Inquirer.js/blob/master/packages/inquirer/examples/nested-call.js
@@ -52,7 +68,23 @@ function addEngineer() {
             answers.engineerEmail,
             answers.engineerGitHub);
         console.log(newEngineer);
-        teamMembers.push(newEngineer);
+        const engiTemplate = 
+        `
+<card class="card" id="${newEngineer.name}">
+    <div>
+        <div>
+            <h3>${newEngineer.name}</h3>
+            <h4>${newEngineer.getRole()}</h4>
+        </div>
+        <ul>
+            <li>${newEngineer.id}</li>
+            <li>${newEngineer.email}</li>
+            <li>${newEngineer.gitHub}</li>
+        </ul>
+    </div>
+</card>
+        `
+    teamMembers.push(engiTemplate);
         addEmployee();
     })
 };
@@ -64,7 +96,23 @@ function addIntern() {
             Number(answers.internID),
             answers.internEmail,
             answers.internSchool);
-        teamMembers.push(newIntern);
+        const internTemplate =
+        `
+<card class="card" id="intern-name">
+    <div>
+        <div>
+            <h3>${newIntern.name}</h3>
+            <h4>${newIntern.getRole()}</h4>
+        </div>
+        <ul>
+            <li>${newIntern.id}</li>
+            <li>${newIntern.email}</li>
+            <li>${newIntern.school}</li>
+        </ul>
+    </div>
+</card>
+        `
+        teamMembers.push(internTemplate);
         addEmployee();
     })
 };
